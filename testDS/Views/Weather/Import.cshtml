@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Импорт данных погоды";
+}
+
+<h2>Импорт данных погоды</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+else if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-controller="Weather" asp-action="ImportWeather" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="formFiles" class="form-label">Выберите файлы Excel</label>
+        <input type="file" name="formFiles" id="formFiles" class="form-control" multiple required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Загрузить</button>
+</form>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-3">Назад</a>

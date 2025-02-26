@@ -1,0 +1,65 @@
+﻿@model testDS.ViewModels.ViewWeatherViewModel
+
+@{
+	ViewData["Title"] = "Просмотр погоды";
+}
+
+<form method="get" action="@Url.Action("ViewWeather")">
+	<div class="inputDivV">
+		<div class="inputDiv">
+			<div>
+				<label>Выберите начальный год и месяц: </label>
+				<input type="month" name="beginInputDate" id="beginInputDate" value = "@Model.BeginDate" class="form-control">
+			</div>
+			<div>
+				<label>Выберите конечный год и месяц: </label>
+				<input type="month" name="endInputDate" id="endInputDate" value = "@Model.EndDate" class="form-control">
+			</div>
+		</div>
+	</div><br/>
+	<button type="submit" class="btn btn-primary formButton">Применить фильтры</button>
+</form>
+
+<div class="card-body p-0">
+	<table class="table table-striped mb-0" name="weatherTable" id="weatherTable">
+		<thead class="thead-dark">
+			<tr>
+				<th>Дата</th>
+				<th>Время (московское)</th>
+				<th>T</th>
+				<th>Отн. влажность воздуха, %</th>
+				<th>Td</th>
+				<th>Атм.давление, мм рт. ст.</th>
+				<th>Направление ветра</th>
+				<th>Скорость ветра, м/с</th>
+				<th>Облачность, %</th>
+				<th>h</th>
+				<th>VV</th>
+				<th>Погодные явления</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var weather in Model.WeatherModels)
+			{
+				<tr>
+					<td>@weather.Date</td>
+					<td>@weather.Time</td>
+					<td>@weather.Temp</td>
+					<td>@weather.Humadity</td>
+					<td>@weather.Td</td>
+					<td>@weather.AtmosphericPressure</td>
+					<td>@weather.WindDirection</td>
+					<td>@weather.WindSpeed</td>
+					<td>@weather.Cloudiness</td>
+					<td>@weather.H</td>
+					<td>@weather.VV</td>
+					<td>@weather.WeatherPhenomena</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<div class="pagination">
+	<a href="@Url.Action("ViewWeather", new { page = Model.CurrentPage - 1, beginInputDate = Model.BeginDate, endInputDate = Model.EndDate })" class="btn btn-secondary @(Model.CurrentPage == 1 ? "disabled" : "")">Назад</a>
+	<a href="@Url.Action("ViewWeather", new { page = Model.CurrentPage + 1, beginInputDate = Model.BeginDate, endInputDate = Model.EndDate })" class="btn btn-secondary @(Model.CurrentPage == Math.Ceiling((double)Model.TotalCount / Model.PageSize) ? "disabled" : "")">Вперед</a>
+</div>

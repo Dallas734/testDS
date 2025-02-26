@@ -1,0 +1,13 @@
+﻿.inputDiv 
+{
+    display: flex;
+    width: 50%;
+    gap: 10px;
+}
+
+.inputDivV
+{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
