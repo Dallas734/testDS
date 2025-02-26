@@ -9,8 +9,8 @@ namespace testDS.ViewModels
 		public int TotalCount { get; set; }
 		public int CurrentPage { get; set; }
 		public int PageSize { get; set; }
-		public string BeginDate { get; set; }
-		public string EndDate { get; set; }
+		public string? BeginDate { get; set; }
+		public string? EndDate { get; set; }
 		public List<WeatherModel> WeatherModels { get; set; } = new List<WeatherModel>();
 	}
 }
